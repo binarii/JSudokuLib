@@ -13,7 +13,7 @@ public class BoardIO {
 
 		for (int i = 0; i < Board.GRID_SIZE; i++) {
 			c = puzzle.charAt(i);
-			int mask = Bitmask.toBitmask(c);
+			int mask = Bitmask.getBitmask(c);
 			board.set(i, mask);
 		}
 	}
@@ -22,7 +22,7 @@ public class BoardIO {
 		StringBuilder builder = new StringBuilder();
 
 		for (int i = 0; i < Board.GRID_SIZE; i++) {
-			char c = Bitmask.charValue(board.getValue(i));
+			char c = Bitmask.toChar(board.getValue(i));
 			builder.append(c);
 		}
 

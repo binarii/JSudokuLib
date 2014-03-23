@@ -15,18 +15,18 @@ public class Bitmask {
 		return mask & -mask;
 	}
 
-	public static int intValue(int mask) {
+	public static int toInt(int mask) {
 		if (mask == 0) {
 			return 0;
 		}
 		return getBitCount(getLSB(mask) - 1);
 	}
 
-	public static char charValue(int mask) {
-		return (char) ('0' + intValue(mask));
+	public static char toChar(int mask) {
+		return (char) ('0' + toInt(mask));
 	}
 
-	public static int toBitmask(char c) {
+	public static int getBitmask(char c) {
 		if ((c > '0') && (c <= '9')) {
 			return (1 << (c - '0'));
 		} else if ((c >= 'a') && (c <= 'z')) {
