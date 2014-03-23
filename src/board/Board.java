@@ -73,8 +73,11 @@ public class Board extends BoardConstants {
 	public void updateCandidates(int cell) {
 		CellRef ref = getCellRef(cell);
 
-		m_candidates[cell] = ((~(m_boardMask[cell] | m_rowConflicts[ref.row]
-				| m_colConflicts[ref.col] | m_boxConflicts[ref.box])) & BITMASK);
+		m_candidates[cell] = 
+				((~(m_boardMask[cell] | 
+		            m_rowConflicts[ref.row] |
+		            m_colConflicts[ref.col] | 
+		            m_boxConflicts[ref.box])) & BITMASK);
 
 	}
 
