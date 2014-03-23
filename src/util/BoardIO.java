@@ -14,7 +14,9 @@ public class BoardIO {
 		for (int i = 0; i < Board.GRID_SIZE; i++) {
 			c = puzzle.charAt(i);
 			int mask = Bitmask.getBitmask(c);
-			board.set(i, mask);
+			if (mask != 0) {
+				board.set(i, mask);
+			}
 		}
 	}
 
