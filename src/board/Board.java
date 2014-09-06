@@ -27,7 +27,7 @@ public class Board extends BoardConstants {
 		copy(board);
 	}
 
-	public void reset() {
+	public final void reset() {
 		m_setCount = 0;
 		Arrays.fill(m_gameBoard, 0);
 		Arrays.fill(m_boardMask, 0);
@@ -37,7 +37,7 @@ public class Board extends BoardConstants {
 		Arrays.fill(m_boxConflicts, 0);
 	}
 
-	public void copy(Board board) {
+	public final void copy(Board board) {
 		m_setCount = board.m_setCount;
 		m_gameBoard = Arrays.copyOf(board.m_gameBoard, board.m_gameBoard.length);
 		m_boardMask = Arrays.copyOf(board.m_boardMask, board.m_boardMask.length);
@@ -47,7 +47,7 @@ public class Board extends BoardConstants {
 		m_boxConflicts = Arrays.copyOf(board.m_boxConflicts, board.m_boxConflicts.length);
 	}
 
-	public void remove(int cell) {
+	public final void remove(int cell) {
 		CellRef ref = getCellRef(cell);
 		int val = ~m_gameBoard[cell];
 
@@ -59,7 +59,7 @@ public class Board extends BoardConstants {
 		m_setCount--;
 	}
 
-	public void set(int cell, int value) {
+	public final void set(int cell, int value) {
 		CellRef ref = getCellRef(cell);
 
 		m_gameBoard[cell] = value;
@@ -70,7 +70,7 @@ public class Board extends BoardConstants {
 		m_setCount++;
 	}
 
-	public void updateCandidates(int cell) {
+	public final void updateCandidates(int cell) {
 		CellRef ref = getCellRef(cell);
 
 		m_candidates[cell] = 
@@ -81,7 +81,7 @@ public class Board extends BoardConstants {
 
 	}
 
-	public boolean isBoardValid() {
+	public final boolean isBoardValid() {
 
 		// Iterate all the units (27 standard)
 		for (int i = 0; i < UNIT_COUNT; ++i) {
@@ -112,31 +112,31 @@ public class Board extends BoardConstants {
 		return true;
 	}
 
-	public void mask(int cell, int mask) {
+	public final void mask(int cell, int mask) {
 		m_boardMask[cell] |= mask;
 	}
 
-	public void clearMask(int cell) {
+	public final void clearMask(int cell) {
 		m_boardMask[cell] = 0;
 	}
 
-	public int getValue(int cell) {
+	public final int getValue(int cell) {
 		return m_gameBoard[cell];
 	}
 
-	public int getCandidates(int cell) {
+	public final int getCandidates(int cell) {
 		return m_candidates[cell];
 	}
 
-	public boolean isBoardFull() {
+	public final boolean isBoardFull() {
 		return m_setCount == GRID_SIZE;
 	}
 
-	public boolean isBoardSolved() {
+	public final boolean isBoardSolved() {
 		return isBoardFull() && isBoardValid();
 	}
 
-	public int getFilledCount() {
+	public final int getFilledCount() {
 		return m_setCount;
 	}
 }

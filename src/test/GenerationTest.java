@@ -12,7 +12,7 @@ public class GenerationTest {
 	public static int SOLVED_TEST_SIZE = 5000;
 	public static int FACTORY_TEST_SIZE = 1000;
 
-	public static void testPuzzleFactory() {
+	public static void testPuzzleFactory(boolean print) {
 		Timer timer = new Timer();
 		timer.startTimer();
 
@@ -27,19 +27,23 @@ public class GenerationTest {
 
 			totalTime += factory.getSolveTime();
 
-			String boardString = BoardIO.getString(board);
+			if (print) {
+				String boardString = BoardIO.getString(board);
 
-			System.out.println(boardString);
+				System.out.println(boardString);
+			}
 		}
 
 		timer.stopTimer();
 		realTime = timer.getTimeMS();
 
+		System.out.print("Testing puzzle factory with N = ");
+		System.out.println(FACTORY_TEST_SIZE);
 		System.out.println("Test finished after " + totalTime + "ms");
-		System.out.println("Test real time: " + realTime + "ms");
+		System.out.println("Test real time: " + realTime + "ms\n");
 	}
 
-	public static void testSolvedGeneration() {
+	public static void testSolvedGeneration(boolean print) {
 		Timer timer = new Timer();
 		timer.startTimer();
 
@@ -55,20 +59,25 @@ public class GenerationTest {
 			solver.solve(board);
 			totalTime += solver.getSolveTime();
 
-			String boardString = BoardIO.getString(board);
+			if (print) {
+				String boardString = BoardIO.getString(board);
 
-			System.out.println(boardString);
+				System.out.println(boardString);
+			}
 		}
 
 		timer.stopTimer();
 		realTime = timer.getTimeMS();
 
+		System.out.print("Testing solved puzzle generation with N = ");
+		System.out.println(SOLVED_TEST_SIZE);
 		System.out.println("Test finished after " + totalTime + "ms");
-		System.out.println("Test real time: " + realTime + "ms");
+		System.out.println("Test real time: " + realTime + "ms\n");
 	}
 
 	public static void main(String[] args) {
-		// testSolvedGeneration();
-		testPuzzleFactory();
+		boolean print = false;
+		testSolvedGeneration(print);
+		testPuzzleFactory(print);
 	}
 }
