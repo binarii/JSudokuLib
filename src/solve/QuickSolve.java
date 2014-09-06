@@ -1,88 +1,22 @@
 package solve;
 
 import util.Bitmask;
-import util.Timer;
 import board.Board;
 
-public class QuickSolve implements SolveMethod {
+public class QuickSolve extends BacktrackSolve {
 
-	private Timer m_timer;
-	private double m_solveTime;
-	private int m_maxSolutionCount;
+	@Override
+	protected void preSolve(Board board) {
 
-	public QuickSolve() {
-		m_solveTime = 0.0;
-		m_maxSolutionCount = 1;
-		m_timer = new Timer();
 	}
 
 	@Override
-	public int solve(Board board) {
-		m_timer.startTimer();
-		int solutionCount = backtrackSolve(board);
-		m_timer.stopTimer();
+	protected void postSolve(Board board) {
 
-		m_solveTime = m_timer.getTimeMS();
-
-		return solutionCount;
 	}
 
 	@Override
-	public double getSolveTime() {
-		return m_solveTime;
-	}
-
-	public void setMaxSolutionCount(int count) {
-		m_maxSolutionCount = count;
-	}
-
-	private class CellValuePair {
-		public CellValuePair(int cell, int value) {
-			this.cell = cell;
-			this.value = value;
-		}
-
-		public int cell;
-		public int value;
-	}
-
-	private int backtrackSolve(Board board) {
-		if (board.isBoardFull()) {
-			return 1;
-		}
-
-		int solutionsFound = 0;
-		CellValuePair pair = new CellValuePair(0, Integer.MAX_VALUE);
-
-		// Try to find a single
-		int count = findSingle(board, pair);
-
-		// If we have found none, backtrack
-		if (count == 0) {
-			return 0;
-		}
-
-		// Try some possibilities
-		int i = Bitmask.getLSB(pair.value);
-
-		while (pair.value > 0) {
-			board.set(pair.cell, i);
-
-			solutionsFound += backtrackSolve(board);
-			if (solutionsFound >= m_maxSolutionCount) {
-				return solutionsFound;
-			}
-
-			board.remove(pair.cell);
-
-			pair.value &= ~i;
-			i = Bitmask.getLSB(pair.value);
-		}
-
-		return solutionsFound;
-	}
-
-	private int findSingle(Board board, CellValuePair pair) {
+	protected int chooseCell(Board board, CellValuePair pair, int depth) {
 		int count;
 
 		int savePos = -1;

@@ -8,4 +8,6 @@ public interface SolveMethod {
 
 	public double getSolveTime();
 
+	public int getBacktrackCount();
+
 }

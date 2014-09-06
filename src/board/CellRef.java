@@ -8,7 +8,7 @@ public class CellRef {
 		this.box = box;
 	}
 
-	public int row;
-	public int col;
-	public int box;
+	public final int row;
+	public final int col;
+	public final int box;
 }

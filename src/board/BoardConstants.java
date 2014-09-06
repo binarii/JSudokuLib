@@ -29,11 +29,11 @@ public class BoardConstants {
 		}
 	}
 
-	public static int iterate(int group, int cell) {
+	public static final int iterate(int group, int cell) {
 		return m_groups[group * UNIT_SIZE + cell];
 	}
 
-	public static CellRef getCellRef(int cell) {
+	public static final CellRef getCellRef(int cell) {
 		return m_cellReference[cell];
 	}
 }
