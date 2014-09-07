@@ -14,7 +14,11 @@ public abstract class BacktrackSolve implements SolveMethod {
 	private double m_solveTime;
 
 	protected BacktrackSolve() {
-		m_maxSolutionCount = 1;
+		this(1);
+	}
+	
+	protected BacktrackSolve(int maxSolutions) {
+		m_maxSolutionCount = maxSolutions;
 		m_timer = new Timer();
 
 		m_solveTime = 0.0;
