@@ -5,12 +5,12 @@ import java.util.Arrays;
 public class Board extends BoardConstants {
 
 	private int m_setCount; // Number of filled cells
-	private int[] m_gameBoard; // Stores the value placed at each cell
-	private int[] m_boardMask; // Mask values not allowed in a cell
-	private int[] m_candidates; // Stores candidate values at cell i
-	private int[] m_rowConflicts; // Stores the conflicts in row i
-	private int[] m_colConflicts; // Stores the conflicts in col i
-	private int[] m_boxConflicts; // Stores the conflicts in box i
+	private final int[] m_gameBoard; // Stores the value placed at each cell
+	private final int[] m_boardMask; // Mask values not allowed in a cell
+	private final int[] m_candidates; // Stores candidate values at cell i
+	private final int[] m_rowConflicts; // Stores the conflicts in row i
+	private final int[] m_colConflicts; // Stores the conflicts in col i
+	private final int[] m_boxConflicts; // Stores the conflicts in box i
 
 	public Board() {
 		m_setCount = 0;
@@ -39,12 +39,12 @@ public class Board extends BoardConstants {
 
 	public final void copy(Board board) {
 		m_setCount = board.m_setCount;
-		m_gameBoard = Arrays.copyOf(board.m_gameBoard, board.m_gameBoard.length);
-		m_boardMask = Arrays.copyOf(board.m_boardMask, board.m_boardMask.length);
-		m_candidates = Arrays.copyOf(board.m_candidates, board.m_candidates.length);
-		m_rowConflicts = Arrays.copyOf(board.m_rowConflicts, board.m_rowConflicts.length);
-		m_colConflicts = Arrays.copyOf(board.m_colConflicts, board.m_colConflicts.length);
-		m_boxConflicts = Arrays.copyOf(board.m_boxConflicts, board.m_boxConflicts.length);
+		System.arraycopy(board.m_gameBoard, 0, m_gameBoard, 0, m_gameBoard.length);
+		System.arraycopy(board.m_boardMask, 0, m_boardMask, 0, m_boardMask.length);
+		System.arraycopy(board.m_candidates, 0, m_candidates, 0, m_candidates.length);
+		System.arraycopy(board.m_rowConflicts, 0, m_rowConflicts, 0, m_rowConflicts.length);
+		System.arraycopy(board.m_colConflicts, 0, m_colConflicts, 0, m_colConflicts.length);
+		System.arraycopy(board.m_boxConflicts, 0, m_boxConflicts, 0, m_boxConflicts.length);
 	}
 
 	public final void remove(int cell) {
