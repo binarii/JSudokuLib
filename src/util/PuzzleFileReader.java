@@ -31,10 +31,14 @@ public class PuzzleFileReader {
 
 	public Board readBoard() {
 		Board board = new Board();
-		String line = readLine();
-
-		BoardIO.loadBoard(board, line);
+		readBoard(board);
 		return board;
+	}
+
+	public void readBoard(Board out) {
+		out.reset();
+		String line = readLine();
+		BoardIO.loadBoard(out, line);
 	}
 
 	public boolean isReady() {
