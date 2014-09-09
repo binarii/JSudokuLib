@@ -7,17 +7,14 @@ import board.Board;
 public abstract class MinimizeMethod {
 
 	private int m_clueCount;
+	private static BacktrackSolve solver = new QuickSolve(2);
+	private static Board boardCpy = new Board();
 
 	public void minimize(Board board) {
 		int solutionCount = 0;
 		int size = getIndexingLength();
 		int rate = getSymmetryCount();
 		int[] digCells = new int[rate];
-
-		BacktrackSolve solver = new QuickSolve();
-		Board boardCpy = new Board(board);
-
-		solver.setMaxSolutionCount(2);
 
 		for (int i = 0; (i < size) && (board.getFilledCount() > m_clueCount); i++) {
 			boardCpy.copy(board);

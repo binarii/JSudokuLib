@@ -1,7 +1,7 @@
 package util;
 
 public class Bitmask {
-	private static int[] bitCountArray;
+	private static final int[] bitCountArray;
 
 	static {
 		bitCountArray = new int[1 << 10];
@@ -11,22 +11,26 @@ public class Bitmask {
 		}
 	}
 
-	public static int getLSB(int mask) {
+	public static final int getBitCount(int mask) {
+		return bitCountArray[mask];
+	}
+
+	public static final int getLSB(int mask) {
 		return mask & -mask;
 	}
 
-	public static int toInt(int mask) {
+	public static final int toInt(int mask) {
 		if (mask == 0) {
 			return 0;
 		}
 		return getBitCount(getLSB(mask) - 1);
 	}
 
-	public static char toChar(int mask) {
+	public static final char toChar(int mask) {
 		return (char) ('0' + toInt(mask));
 	}
 
-	public static int getBitmask(char c) {
+	public static final int getBitmask(char c) {
 		if ((c > '0') && (c <= '9')) {
 			return (1 << (c - '0'));
 		} else if ((c >= 'a') && (c <= 'z')) {
@@ -35,11 +39,7 @@ public class Bitmask {
 		return 0;
 	}
 
-	public static int bitCountCalc(int val) {
+	private static int bitCountCalc(int val) {
 		return Integer.bitCount(val);
-	}
-
-	public static int getBitCount(int mask) {
-		return bitCountArray[mask];
 	}
 }

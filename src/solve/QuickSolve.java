@@ -5,9 +5,41 @@ import board.Board;
 
 public class QuickSolve extends BacktrackSolve {
 
+	public QuickSolve() {
+		super();
+	}
+
+	public QuickSolve(int maxSolutions) {
+		super(maxSolutions);
+	}
+
 	@Override
 	protected void preSolve(Board board) {
+		boolean done = false;
+		int count;
 
+		while (!done) {
+			done = true;
+
+			for (int i = 0; i < Board.GRID_SIZE; i++) {
+				if (board.getValue(i) != 0) {
+					continue;
+				}
+
+				// Update and get possibilities for cell i
+				board.updateCandidates(i);
+				int possible = board.getCandidates(i);
+
+				// Get the bit count for the cell
+				count = Bitmask.getBitCount(possible);
+
+				// If cell has one possibility play it
+				if (count == 1) {
+					board.set(i, possible);
+					done = false;
+				}
+			}
+		}
 	}
 
 	@Override
